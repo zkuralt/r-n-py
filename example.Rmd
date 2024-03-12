@@ -18,7 +18,6 @@ Let's first load R packages
 library(DESeq2)
 library(reticulate)
 library(EnhancedVolcano)
-library(dplyr)
 ```
 
 ```{r importdata}
@@ -70,15 +69,10 @@ from pydeseq2.ds import DeseqStats
 
 ```{python prepare py data}
 counts_df = pd.DataFrame(r.rc.T) # r["rc"] works as well.
-
 meta = pd.DataFrame(r.meta)
-print(meta)
 
-# create filtered dataset
 genes_to_keep = counts_df.columns[counts_df.sum(axis = 0) > 10]
 counts_df_filtrd = counts_df[genes_to_keep]
-
-inference = DefaultInference(n_cpus=6) 
 ```
 
 ## **pydeseq2** 
