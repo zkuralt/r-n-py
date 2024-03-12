@@ -11,7 +11,7 @@ output:
       collapsed: true
 ---
 
-# Prepare inputs for the **DESeq2**
+# **DESeq2**
 
 Let's first load R packages
 ```{r load r libraries, warning=FALSE, error=FALSE, message=FALSE}
@@ -41,17 +41,20 @@ dds <- DESeq(dds)
 results <- results(dds, alpha = 0.05)
 ```
 
-# Prepare inputs for the **pydeseq2**
-
-Well, I will actually use the inputs from R part (above), as they can be accessed by the "r." command.
+# **pydeseq2**
 
 ## Select virtual environment where python libraries are installed (by default this is "r-reticulate"). One can install packages using the py_install() function.
 
-```{r activate_venv, warning=FALSE}
-use_virtualenv("r-reticulate")
+The chunk below creates virtual environment and installs python libraries in there. It is set to eval=FALSE since one should only run it once.
+```{r create venv and install libraries, eval=FALSE}
+virtualenv_create(envname = "RLadies", packages = c("pandas", "pydeseq2"), python = "3.12")
 ```
 
-## Load libraries first
+```{r activate_venv, warning=FALSE}
+use_virtualenv("RLadies")
+```
+
+## Load libraries
 
 ```{python import libs}
 import os
@@ -65,10 +68,6 @@ from pydeseq2.ds import DeseqStats
 
 ## Import objects created in R (above). Filter counts data by the same threshold (> 10) as was used in R implementation *DESeq2*.
 
-```{python}
-r["rc"].T
-```
-
 ```{python prepare py data}
 counts_df = pd.DataFrame(r.rc.T) # r["rc"] works as well.
 
@@ -81,7 +80,9 @@ counts_df_filtrd = counts_df[genes_to_keep]
 
 inference = DefaultInference(n_cpus=6) 
 ```
+
 ## **pydeseq2** 
+
 ```{python pydeseq2}
 inference = DefaultInference(n_cpus=6)
 
@@ -132,6 +133,8 @@ plt1 <- plt +
 
 plt1
 ```
+
+## Scatterplot
 
 ```{r}
 plot(res_r$log2FoldChange, res_py$log2FoldChange)
