@@ -44,9 +44,11 @@ results <- results(dds, alpha = 0.05)
 
 ## Select virtual environment where python libraries are installed (by default this is "r-reticulate"). One can install packages using the py_install() function.
 
-The chunk below creates virtual environment and installs python libraries in there. It is set to eval=FALSE since one should only run it once.
-```{r create venv and install libraries, eval=FALSE}
-virtualenv_create(envname = "RLadies", packages = c("pandas", "pydeseq2"), python = "3.12")
+The chunk below creates virtual environment and installs python libraries in there.
+```{r create venv and install libraries}
+if (!any(virtualenv_list() %in% "RLadies")) {
+  virtualenv_create(envname = "RLadies", packages = c("pandas", "pydeseq2"))
+}
 ```
 
 ```{r activate_venv, warning=FALSE}
