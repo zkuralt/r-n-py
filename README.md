@@ -1,4 +1,4 @@
-This is an example script for the RLadies meetup.
+This is an example script for the R-Ladies Ljubljana meetup.
 
 We will compare results created by the [`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) R package and its Python implementation [`pydeseq2`](https://pydeseq2.readthedocs.io/en/latest/).
 
