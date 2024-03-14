@@ -8,4 +8,10 @@ Some technicalities:
 
 You should now be able to run the *example.Rmd* script without problems :)
 
+Update:
+Well, as usual, things did not go as smoothly as one would have wanted.
+- Windows users had problems with installing packages via `renv::restore()`, but manually installing packages mostly did the trick.
+- Mac user had to explicitly set/select Python interpreter in the RStudio settings (Toools - Global options - Python).
+- Linux user had no issues whatsoever :)
+
 
