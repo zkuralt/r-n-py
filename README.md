@@ -4,7 +4,7 @@ We will compare results created by the [`DESeq2`](https://bioconductor.org/packa
 
 Some technicalities:
 - `git clone git@github.com:zkuralt/r-n-py.git` will teleport this folder to your computer.
-- Running renv::restore() will install all the R packages needed.
+- Running `renv::restore()` will install all the R packages needed.
 
 See [`reticulate`](https://rstudio.github.io/reticulate/) docs for a lot more information ;)
 
